@@ -391,7 +391,7 @@ a:hover {
 }
 
 
-.switch_default[type=checkbo] {
+.switch_default[type=checkbox] {
   display: none;
 }
 .switch_default + label {
