@@ -149,8 +149,20 @@ template {
   font-weight: 300;
   font-display: swap;
 }
+@font-face {
+  font-family: 'Sora';
+  src: url("../fonts/sora/Sora-Regular.woff2") format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Sora';
+  src: url("../fonts/sora/Sora-SemiBold.woff2") format('woff2');
+  font-weight: 600;
+  font-display: swap;
+}
 html {
-  font-family: 'Microsoft Jhenghei', Lantinghei SC, 'lanting', PingFang SC, Seguo UI, Microsoft Yahei, Arial;
+  font-family: "Sora", 'Microsoft Jhenghei', Lantinghei SC, 'lanting', PingFang SC, Seguo UI, Microsoft Yahei, Arial;
 }
 html::-webkit-scrollbar {
   width: 8px;
@@ -379,7 +391,7 @@ a:hover {
 }
 
 
-.switch_default[type=checkbox] {
+.switch_default[type=checkbo] {
   display: none;
 }
 .switch_default + label {
