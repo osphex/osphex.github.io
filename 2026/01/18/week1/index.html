@@ -120,7 +120,7 @@ function() {
 
 
 
-<title>Archives | osphex</title>
+<title>Week#1 - 刻意忙碌的生活 | osphex</title>
 
 
 
@@ -238,33 +238,208 @@ function() {
     }
 </script>
             <div class="main">
-                <div class="post-wrap archive">
+                <div class="container">
     
     
-        
-
-        
-            <h3>2026</h3>
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2026/01/18/week1/">Week#1 - 刻意忙碌的生活</a>
-            <span class="archive-item-date">January 18, 2026</span>
-        </article>
-    
-        
-
-        
-            <h3>2025</h3>
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/2025/11/29/First/">First</a>
-            <span class="archive-item-date">November 29, 2025</span>
-        </article>
-    
-    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
 </div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Week#1 - 刻意忙碌的生活</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">osphex</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">January 18, 2026&nbsp;&nbsp;23:22:28</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="写在之前"><a href="#写在之前" class="headerlink" title="写在之前"></a>写在之前</h1><p>想给我的第一篇周记一个有仪式感的开头，自从创建了这个博客之后，就很喜欢常常去看一些别人的博客，在社交平台泛滥的当下，依然有一批人在更新自己的博客，装扮自己的主页，像小时候的qq空间，我很喜欢这种互联网上有自己专属的角落的感觉，所以也想好好经营自己的博客，学习一下一些优秀的博客内容。</p>
+<p>用频繁的记录去对抗日渐衰退的记忆，努力觉察自己的生活。</p>
+<h1 id="朋友朋友"><a href="#朋友朋友" class="headerlink" title="朋友朋友"></a>朋友朋友</h1><p>本意是想从2026年第一周就开始记录的，朋友的到来让我没有静下心来好好思考的机会，所以一直拖延到现在。</p>
+<p>和好久不见的朋友见面是什么感觉呢，说不上来，只是和朋友分开后，我总是常常在想念她，只好一直刻意让自己忙起来，这一周回想了很多很多过去相处时的细节，才发现我们沟通的频率远比我想象中还高，她占据了我过去生活的80%，可我日常的碎碎念里她的占比却很少，也许过于有安全感的关系总会让我忽略对方的重要性。</p>
+<p>面对她我很少有很大的情绪波动，过去我以为是我们真的很合适，我们打心底里互相欣赏对方，所以从不产生矛盾，现在想来，或许是她迁就了我很多，又或许我们只是没那么重视对方，我不知道该如何为自己辩解，又该怎么为我可能做错的事情道歉，最可能的是，她不需要什么道歉。</p>
+<p>我也不知道，我只是在反复反刍我们关系的时候，得出结论，无论是19年的我，还是26年的我，无论我怎么变化，都依然会被她吸引，就像我现在依旧会偏爱喜欢写文字、喜欢用语言伪装自己、喜欢一些文艺的女生。</p>
+<p>和这个朋友分开了，下一个朋友很快就要到来，我像民宿老板一样在这里接待一个又一个朋友。</p>
+<p>下一个就是第四个来我这里住的朋友了，人的一生又有多少13年呢，来上海前，我在太原最珍重的朋友也不过就是她了，另一个在香港，我今年选择不回家过年，也是因为此行已经能够和她见面了，我是一个从不恋家的人，唯一值得我留恋的就是这些朋友。</p>
+<p>有些朋友就是更适合线下见面的，我攒了很多要吐槽的事情，攒了很多对朋友和对她身边人的好奇，期待我们见面，也期待早早相约见到另一位朋友。</p>
+<h1 id="要进步"><a href="#要进步" class="headerlink" title="要进步"></a>要进步</h1><p>这周是入职半年来第一次感到焦虑。</p>
+<p>这周出现了很多bug都无法独立解决，是入职这么久第一次没有产出的一周，几乎每个项目都因为我无法妥善解决而停滞，虽然没有人怪我，但是这样的状态我很不喜欢，也不喜欢因为情绪波动而影响了工作。</p>
+<p>与此同时公司来了一位实习生，对技术的热爱让我自惭形秽，他真的很像黄色海绵，入职这段时间感觉他的生活除了睡觉就是工作，通宵过好多个夜晚，佩服一下，不愧是年轻人，我已经稍微熬一会儿夜就头晕眼花了，实习生弟弟下周女朋友来了应该会好一点吧，不要卷啦！</p>
+<p>反思一下自己，刚开始的时候接到需求我也是这样兴奋的，满脑子都是如何实现，好像在完全熟悉前后端架构以后就失去了对代码的探索欲望，但其实还有很多很多不够熟悉，没有学会的地方，不然也不会出现一些简单关于tf变换的bug都无法解决的情况，下一步要真的好好理解一下算法了，很多东西都是一知半解，学会了还会忘记，甚至有些概念，客户问起来都没那么熟悉，还是不能懈怠啊小杨。</p>
+<h1 id="生活"><a href="#生活" class="headerlink" title="生活"></a>生活</h1><p>忙碌的工作之余也并非没有生活，本周还在下班后抽空去了一趟迪士尼，还打了羽毛球，虽然打羽毛球的那天打完还回公司加班了，但是我还蛮喜欢这种忙碌的生活的，尤其是和伙伴们加班到凌晨两点，为解决一个bug而兴奋的时候，我想我真的很喜欢这种一起奋斗的感觉。</p>
+<p>打算今年之前看完的书也一直没时间看完，希望下周能空出时间读书，空出世间学习一些新的东西，不要再待在舒适区啦。</p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2025/11/29/First/">First</a>
+            
+        </section>
+
+        <!-- Giscus 评论区挂载点 -->
+<div id="giscus-container" style="margin-top: 2.5rem;"></div>
+
+<!-- Giscus 动态加载脚本：初始加载 + 明暗主题切换 -->
+<script>
+  function createGiscus(theme) {
+    const giscusContainer = document.getElementById('giscus-container');
+    if (!giscusContainer) return;
+
+    // 清除旧的评论 iframe
+    giscusContainer.innerHTML = '';
+
+    const script = document.createElement('script');
+    script.src = 'https://giscus.app/client.js';
+
+    // 替换为你的 GitHub 仓库信息（格式：username/repo）
+    script.setAttribute('data-repo', 'osphex/osphex.github.io');
+
+   // 替换为你的 repo-id 和 category-id（在 giscus.app 配置页面生成）
+    script.setAttribute('data-repo-id', 'R_kgDONL8mcg');
+    script.setAttribute('data-category', 'Announcements');
+    script.setAttribute('data-category-id', 'DIC_kwDONL8mcs4CzfMj');
+
+    // 其他常规推荐设置
+    script.setAttribute('data-mapping', 'pathname');           // 用页面路径匹配评论帖
+    script.setAttribute('data-strict', '0');                   // 若无匹配帖则创建新帖
+    script.setAttribute('data-reactions-enabled', '0');        // 启用表情反应
+    script.setAttribute('data-emit-metadata', '0');            // 不输出元数据
+    script.setAttribute('data-input-position', 'top');         // 输入框在评论上方
+    script.setAttribute('data-theme', theme);                
+    script.setAttribute('data-lang', 'zh-CN');                 // 中文界面
+    script.setAttribute('crossorigin', 'anonymous');           // 跨域资源安全
+    script.async = true;                                       
+     
+    giscusContainer.appendChild(script);
+  }
+
+  function getCurrentTheme() {
+  return document.body.classList.contains('dark-theme')
+      ? 'noborder_dark'
+      : 'noborder_light';
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // 页面首次加载，根据当前主题挂载评论
+    createGiscus(getCurrentTheme());
+
+    // 监听按钮点击切换主题 → 重载评论区
+    const buttons = [
+      document.querySelector('.toggleBtn'),
+      document.getElementById('mobile-toggle-theme')
+    ];
+    buttons.forEach(btn => {
+      if (!btn) return;
+      btn.addEventListener('click', () => {
+        setTimeout(() => {
+          createGiscus(getCurrentTheme());
+        }, 400); // 稍作延迟，确保 class 切换完毕
+      });
+    });
+
+    // 监听 body class 改变（保险方案）
+    const observer = new MutationObserver(() => {
+      createGiscus(getCurrentTheme());
+    });
+    observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+  });
+</script>
+
+
+    </article>
+</div>
+
 <script>
 !
 function() {
@@ -371,6 +546,7 @@ function() {
     100)
 } ();
 </script>  
+
             </div>
             <footer id="footer" class="footer">
     <div class="copyright">
