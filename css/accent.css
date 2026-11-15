@@ -1,0 +1,63 @@
+body {
+  --site-accent: #28754e;
+  --site-accent-hover: #195c3a;
+  --site-accent-tint: #edf6ef;
+  --site-accent-table: #d7ecde;
+}
+
+body.dark-theme {
+  --site-accent: #85c7a0;
+  --site-accent-hover: #b6e4c7;
+  --site-accent-tint: #2e3a34;
+  --site-accent-table: #35483d;
+}
+
+header nav a,
+header .theme-toggle {
+  cursor: pointer;
+}
+
+header .theme-toggle {
+  padding: 0 8px;
+  border: 0;
+  background: none;
+  color: #161209;
+  font: inherit;
+  transition: color 0.2s ease;
+}
+
+.dark-theme header .theme-toggle {
+  color: #a9a9b3;
+}
+
+body .wrapper header .theme-toggle:hover,
+body .wrapper header .theme-toggle:focus-visible {
+  color: var(--site-accent);
+}
+
+body .wrapper a:hover,
+body .wrapper .tag-cloud-tags a:focus-visible {
+  color: var(--site-accent);
+}
+
+body .wrapper :is(.post-content, .post-meta, .post-copyright) a,
+body .wrapper .post-content :is(h1, h2, h3, h4)::before {
+  color: var(--site-accent);
+}
+
+body .wrapper :is(.post-content, .post-meta, .post-copyright) a:hover {
+  color: var(--site-accent-hover);
+}
+
+body .wrapper .post-content table thead {
+  background-color: var(--site-accent-table);
+}
+
+body .wrapper .post-content blockquote:not(.pullquote) {
+  background-color: var(--site-accent-tint);
+  border-inline-start-color: var(--site-accent);
+}
+
+body .wrapper .post-toc .is-active-link::before {
+  background-color: var(--site-accent);
+}
