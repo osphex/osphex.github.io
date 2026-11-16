@@ -12,6 +12,7 @@
   const figures = [...gallery.querySelectorAll('.gallery-photo')];
   const albums = [...thumbnails.querySelectorAll('ul')];
   const buttons = [...thumbnails.querySelectorAll('[data-photo]')];
+  const compact = window.matchMedia('(max-width: 700px)');
   const hover = window.matchMedia('(hover: hover) and (pointer: fine)');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let albumIndex = 0;
@@ -22,14 +23,13 @@
   let wheelTurned = false;
   let photoFade;
 
-  function centerThumbnail(button, animate = false) {
-    const viewport = thumbnails.getBoundingClientRect();
-    const thumbnail = button.getBoundingClientRect();
-    const offset = thumbnail.top - viewport.top + (thumbnail.height - viewport.height) / 2;
-    thumbnails.scrollTo({
-      top: thumbnails.scrollTop + offset,
-      behavior: animate && !reducedMotion.matches ? 'smooth' : 'instant'
-    });
+  function centerItem(list, item, animate = false) {
+    const viewport = list.getBoundingClientRect();
+    const itemRect = item.getBoundingClientRect();
+    const position = compact.matches
+      ? { left: list.scrollLeft + itemRect.left - viewport.left + (itemRect.width - viewport.width) / 2 }
+      : { top: list.scrollTop + itemRect.top - viewport.top + (itemRect.height - viewport.height) / 2 };
+    list.scrollTo({ ...position, behavior: animate && !reducedMotion.matches ? 'smooth' : 'instant' });
   }
 
   function selectPhoto(button) {
@@ -59,7 +59,7 @@
     dots[index].setAttribute('aria-current', 'true');
     albums[index].hidden = false;
     selectPhoto(photo);
-    centerThumbnail(photo);
+    centerItem(thumbnails, photo);
   }
 
   function browsePhotos(event) {
@@ -89,10 +89,10 @@
     const nextAlbum = albums.indexOf(next.closest('ul'));
     if (nextAlbum === albumIndex) {
       selectPhoto(next);
-      centerThumbnail(next);
+      centerItem(thumbnails, next);
     } else {
       selectAlbum(nextAlbum, next);
-      months.scrollTop = nextAlbum * dots[nextAlbum].offsetHeight;
+      centerItem(months, dots[nextAlbum]);
     }
   }
 
@@ -104,16 +104,27 @@
   }
 
   function setExpanded(expanded) {
+    expanded = expanded || compact.matches;
     const opening = expanded && thumbnails.hasAttribute('inert');
     toggle.setAttribute('aria-expanded', String(expanded));
     thumbnails.toggleAttribute('inert', !expanded);
-    if (opening) centerThumbnail(thumbnails.querySelector('[aria-pressed="true"]'));
+    if (opening) centerItem(thumbnails, thumbnails.querySelector('[aria-pressed="true"]'));
   }
+
+  function syncLayout() {
+    pinned = false;
+    setExpanded(false);
+    centerItem(months, dots[albumIndex]);
+    centerItem(thumbnails, thumbnails.querySelector('[aria-pressed="true"]'));
+  }
+
+  compact.addEventListener('change', syncLayout);
+  syncLayout();
 
   dots.forEach((dot, index) => {
     dot.addEventListener('click', () => {
       selectAlbum(index);
-      months.scrollTop = index * dot.offsetHeight;
+      centerItem(months, dot);
     });
     dot.addEventListener('pointerenter', event => {
       if (event.pointerType === 'mouse' || event.pointerType === 'pen') setMonthScale(index);
@@ -132,13 +143,13 @@
   buttons.forEach(button => button.addEventListener('click', event => {
     if (hover.matches && event.detail > 0 && event.pointerType !== 'touch') pinned = false;
     selectPhoto(button);
-    centerThumbnail(button, true);
+    centerItem(thumbnails, button, true);
   }));
   rail.addEventListener('pointerenter', () => {
     if (hover.matches) setExpanded(true);
   });
   rail.addEventListener('pointerleave', () => {
-    if (pinned || rail.matches(':has(:focus-visible)')) return;
+    if (compact.matches || pinned || rail.matches(':has(:focus-visible)')) return;
     if (thumbnails.contains(document.activeElement)) toggle.focus({ preventScroll: true });
     setExpanded(false);
   });
@@ -150,7 +161,7 @@
     setExpanded(pinned);
   });
   rail.addEventListener('keydown', event => {
-    if (event.key !== 'Escape' || thumbnails.hasAttribute('inert')) return;
+    if (compact.matches || event.key !== 'Escape' || thumbnails.hasAttribute('inert')) return;
     pinned = false;
     toggle.focus();
     setExpanded(false);
